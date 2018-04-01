@@ -2,14 +2,6 @@
   <link rel="stylesheet" href=".style/main.css">
 <div id="dvTable">
  <script>
- var $_GET = {},
-    args = location.search.substr(1).split(/&/);
-for (var i=0; i<args.length; ++i) {
-    var tmp = args[i].split(/=/);
-    if (tmp[0] != "") {
-        $_GET[decodeURIComponent(tmp[0])] = decodeURIComponent(tmp.slice(1).join("").replace("+", " "));
-    }
-}
  
  	  var _api_2="clszkicyyd";
 var _api="https://api.railwayapi.com/v2/route/train/"+$_GET.train+"/apikey/"+_api_2+"/";
