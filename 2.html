@@ -11,10 +11,38 @@ var _api="https://api.railwayapi.com/v2/route/train/"+$_GET.train+"/apikey/"+_ap
   </script>
  <script src="./js/load_json_2.js"></script>
   <script>
+   var __data= new Array();
+     
+    __data.push(["Longitude","Latitude"]);
 for(var _i=0;_i<_data.route.length;_i++)
 {
-//_arr.push(_data.route[_i].station);
-document.write(_data.route[_i].station.lng+"<br>");
+var _arr=[];
+
+  _arr.push(_data.route[_i].station.lat);
+  _arr.push(_data.route[_i].station.lng);
+  __data.push(_arr);
+var table = document.createElement("TABLE");
+            table.border = "1";
+            //Get the count of columns.
+            var columnCount =__data[0].length;
+            //Add the header row.
+            var row = table.insertRow(-1);
+            for (var i = 0; i < columnCount; i++) {
+                var headerCell = document.createElement("TH");
+                headerCell.innerHTML =__data[0][i];
+                row.appendChild(headerCell);
+            }
+            //Add the data rows.
+            for (var i = 1; i <__data.length; i++) {
+                row = table.insertRow(-1);
+                for (var j = 0; j < columnCount; j++) {
+                    var cell = row.insertCell(-1);
+                    cell.innerHTML =__data[i][j];
+                }
+            }
+            var dvTable = document.getElementById("dvTable");
+            dvTable.innerHTML = "";
+            dvTable.appendChild(table);
 
 }
 </script>
