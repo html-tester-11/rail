@@ -1,0 +1,51 @@
+<html>
+ <script>
+ var $_GET = {},
+    args = location.search.substr(1).split(/&/);
+for (var i=0; i<args.length; ++i) {
+    var tmp = args[i].split(/=/);
+    if (tmp[0] != "") {
+        $_GET[decodeURIComponent(tmp[0])] = decodeURIComponent(tmp.slice(1).join("").replace("+", " "));
+    }
+}
+ 
+ 	  var _api_2="clszkicyyd";
+var _api="https://api.railwayapi.com/v2/route/train/"+$_GET.train+"/apikey/"+_api_2+"/";
+
+function loadJSON(file, callback) {
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', file, false); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);
+ }
+var _data;
+function load()
+{
+   loadJSON(_api, function(response)
+   {
+        //alert(response);
+         _data = JSON.parse(response); //eval('(' +response+')')
+        
+     
+
+
+          });
+
+}
+load();
+
+console.log(_data);
+for(var _i=0;_i<_data.length;_i++)
+{
+	alert(_i)
+}
+document.write(JSON.stringify(_data.route));
+</script>
+</html>
